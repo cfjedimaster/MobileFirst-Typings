@@ -1,6 +1,9 @@
 // Type definitions for MobileFirst 7.1
 // Definitions by: Raymond Camden <https://github.com/cfjedimaster/>
 
+/**
+ * This is the core library for working with IBM MobileFirst and hybrid mobile apps.
+ */
 declare var WL: {
 
 	/**
