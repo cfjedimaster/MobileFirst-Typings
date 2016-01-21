@@ -8,63 +8,63 @@ declare var WL: {
 
 	/**
 	 * The IBM® Worklight® Analytics API provides the ability to enable, disable, and log analytics data.
-	 * 
+	 *
 	 * The default settings is enabled, meaning data passed to the WL.Analytics.log API call by both the framework code and your code are persisted. You can explicitly enable or disable persistent data capture by calling WL.Analytics.enable or WL.Analytics.disable.
-	 * 
+	 *
 	 * Starting in IBM® Worklight® V6.2.0, the enabling of Analytics capture by declaring it in initOptions.js is deprecated. For backward compatibility, when Analytics is enabled using initOptions.js, the event WL/ANALYTICS/READY is triggered. It is no longer necessary to wait for this event in order to use the WL.Analytics API.
-	 * 
+	 *
 	 * Starting with IBM® Worklight® V6.2.0, the WL.Analytics API is available for use with no extra configuration or feature enablement required. Persistent collection of WL.Analytics.log data is enabled by default, and sent to the IBM® Worklight® server by default on successful network init.
-	 * 
+	 *
 	 * Note: the data collected via the WL.Analytics API, after sending it to the IBM Worklight server, is made available in the Operational Analytics engine console on the "Search" tab, and only the "Search" tab.
 	 */
 	Anayltics:{
-		
+
 		/**
 		 * Turns off the capture of analytics data.
 		 */
 		disable():PromiseConstructorLike;
-		
+
 		/**
 		 * Turns on the capture of analytics data.
 		 */
 		enable():PromiseConstructorLike;
-		
+
 		/**
 		 * Logs a message with additional contextual information.
-		 * 
+		 *
 		 * @param message The message to log.
 		 * @param name The name of the message to log.
 		 */
 		log(message: string, name: string):PromiseConstructorLike;
-		
+
 		/**
-		 * 
+		 *
 		 * @deprecated since version 6.2. WL.Analytics.restart is now a NOP.
 		 */
 		restart():PromiseConstructorLike;
-		
+
 		/**
 		 * Send any analytics data collected up to this point to the IBM Worklight server.
 		 */
 		send():PromiseConstructorLike;
-		
+
 		/**
 		 * Get the current state of WL.Analytics.
-		 * 
+		 *
 		 * The state object is kept by WL.Analytics and contains the following key:
-		 * 
+		 *
 		 * enabled (boolean) - Value is true if capture is enabled, false otherwise.
-		 * 
+		 *
 		 * Changing the state object that is returned does not affect the state object that is kept internally.
-		 * 
+		 *
 		 * WL.Analytics.state() .then(function (state) { // {enabled: true} }) .fail(function (errObj) { //errObj.src = function that failed //errObj.res = error message });
 		 */
 		state():PromiseConstructorLike;
-		
+
 	}
-	
+
 	App: {
-	
+
 
 		/**
 		 * Registers an action receiver.
@@ -103,14 +103,14 @@ declare var WL: {
 			</tr>
 			</tbody>
 			</table>
-			* 
+			*
 			* @param url
 			*            Mandatory. The URL of the web page to be opened.
 			* @param target
 			*            Optional. The value to be used as the target (or name)
 			*            parameter of JavaScript <code>window.open</code> method. If
 			*            no value is specified, <code>_self</code> will be used.
-			* 
+			*
 			* @param options
 			*            Optional. Parameters hash.
 			*            If no value is specified, the following options are used:
@@ -166,7 +166,7 @@ declare var WL: {
 		* Windows Phone 7.5, and Windows Phone 8 devices, calling the callback function whenever Back is pressed.
 		* @param exception Mandatory. The exception object from which the error string is extracted.
 		*/
-		overrideBackButton(f:function):void;
+		overrideBackButton(f:Function):void;
 
 		/**
 		 * Resets the original Back button behavior.
@@ -195,22 +195,22 @@ declare var WL: {
 Changes the Worklight server URL to the new URL, cleans the HTTP client context, and calls successCallback when finished. After calling this method, the application is not logged in to any server. If the specified URL is malformed, then failCallback is called and the Worklight server URL remains unchanged.
 		 *
 		 * Notes:
-		 * 
+		 *
 		 * The responsibility for checking the validity of the URL is on the developer.
 		 * If the app uses push notification, it is the developer's responsibility to unsubscribe from the previous server and subscribe to the new server. For more information on push notification, see WL.Client.Push.
 		 * When using this function you might want to perform additional clean-up, for example partial or full wipe of JSONStore or HTML5 LocalStorage. For more information on clean-up, see WL.EncryptedCache and WL.JSONStore.
-		 * 
+		 *
 		 * Example: WL.App.setServerUrl("http://9.148.23.88:10080/context", successCallback, failCallback);
-		 * 
+		 *
 		 * @param url Mandatory. The URL of the new server, including protocol, IP, port, and context.
 		 * @param successCallback Optional. The callback function that is called after the Worklight URL is set to the specified URL.
 		 * @param failCallback Optional. The callback function that is called if this method fails or is not supported.
 		 */
 		setServerUrl(url: string, successCallback?:Function, failCallback?:Function):void;
-		
+
 		/**
 		 * Gets Worklight server URL. This method is asynchronous, so the Worklight server URL is returned as an argument to the successCallback function.
-		 * 
+		 *
 		 * @param successCallback Mandatory. The callback function that is called with the Worklight server URL as an argument.
 		 * @param failCallback Optional. The callback function that is called if this method fails.
 		 */
@@ -246,7 +246,7 @@ Changes the Worklight server URL to the new URL, cleans the HTTP client context,
 		 * @example {}
 		 * WL.App.removeActionReceiver("MyReceiver");
 		 */
-		removeActionReceiver(id: string):void;		
+		removeActionReceiver(id: string):void;
 
 		/**
 		 * When an app moves to the background, iOS keeps a snapshot of the app window, to facilitate a smoother transition back to the foreground. This class provides API to handle the background/foreground events that the user can use to disable the snapshot, and therefore prevent any sensitive data from being stored on the device.
@@ -254,23 +254,23 @@ Changes the Worklight server URL to the new URL, cleans the HTTP client context,
 		BackgroundHandler: {
 			/**
 			 * Defines the behavior of the application before it enters the background. Defines the behavior of the application just before iOS takes a screen capture of it before moving it to the background.
-			 * 
+			 *
 			 * @param handler The function that is called when the event is received from iOS that the application is about to enter background
 			 */
-			setOnAppEnteringBackground(handler:Function):void; 
-			
+			setOnAppEnteringBackground(handler:Function):void;
+
 			/**
 			 * Defines the behavior of the application just before it enters the foreground.
-			 * 
+			 *
 			 * @param handler  The function that is called when the event is received from iOS that the application is about to enter foreground.
 			 */
 			setonAppEnteringForeground(handler:Function):void;
-			
+
 		}
 	}
-	
+
 	/**
-	 * 
+	 *
 	 */
 	Badge: {
 		/**
@@ -278,35 +278,35 @@ Changes the Worklight server URL to the new URL, cleans the HTTP client context,
 		 */
 		setNumber(number:number):void;
 	}
-	
+
 	/**
 	 * Display an indication that the application is busy.
 	 * Use the WL.BusyIndicator object to display a modal, dynamic graphical image when the application is temporarily "busy", that is, not responsive to user input.
-	 * 
+	 *
 	 * WL.BusyIndicator is implemented natively in the following environments: iOS, Android, Windows Phone 8 and Windows 8. For a list of available options, review the Constructor Details section below.
-	 * WL.BusyIndicator is implemented using JavaScript in the remaining environments: Mobile Web, Desktop Browser, BlackBerry 6/7/10 and preview. 
+	 * WL.BusyIndicator is implemented using JavaScript in the remaining environments: Mobile Web, Desktop Browser, BlackBerry 6/7/10 and preview.
 	 * To change the appearance of the busy indicator in these environments, override the following CSS selectors: #WLbusyOverlay, #WLbusy, and #WLbusyTitle.
 	 */
 	BusyIndicator(containerId?:string,options?:Object):BusyIndicatorObject;
-	
+
 	/**
 	 * Displays an Android toast box with the specified string.
 	 *
 	 * @param string The text to display in the Android toast.
-	 */	
+	 */
 	Toast:{
 		show(string: string):void;
-		
-	}	
+
+	}
 }
 
 interface BusyIndicatorObject {
-	
+
 	/**
 	 * To hide the busy indicator.
 	 */
 	hide();
-	
+
 	/**
 	 * To show the busy indicator.
 	 */
